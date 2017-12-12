@@ -1,0 +1,77 @@
+#coding:utf-8
+
+import math
+from operator import mod
+
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+from matplotlib.path import Path
+"""
+ceil():向上取整
+floor():向下取整
+"""
+
+fig = plt.figure(figsize=(16, 9))
+axes = fig.add_subplot(1, 1, 1, frameon=False)
+
+# fig = plt.figure(figsize=(15, 15))
+# axes.set_xlim(0,10)
+# axes.set_ylim(0,10)
+
+plt.title("GAP 0, gapoffset=1")
+plt.xlabel("subframe")
+plt.ylabel("SFN")
+
+axes.set_xticks([x for x in range(10)])
+axes.set_yticks([x for x in range(10)])
+axes.grid(True)
+
+verts = [
+    (1., 1.),
+    (1., 2.),
+    (7., 2.),
+    (7., 1.),
+    (1., 1.),
+    ]
+
+codes = [Path.MOVETO,
+         Path.LINETO,
+         Path.LINETO,
+         Path.LINETO,
+         Path.CLOSEPOLY,
+         ]
+
+path = Path(verts, codes)
+
+verts1 = [
+    (1., 5.),
+    (1., 6.),
+    (7., 6.),
+    (7., 5.),
+    (1., 5.),
+    ]
+
+codes1 = [Path.MOVETO,
+         Path.LINETO,
+         Path.LINETO,
+         Path.LINETO,
+         Path.CLOSEPOLY,
+         ]
+
+path1 = Path(verts1, codes1)
+patch1 = patches.PathPatch(path1, facecolor='coral')
+axes.add_patch(patch1)
+
+patch = patches.PathPatch(path, facecolor='coral')
+axes.add_patch(patch)
+for i in range(6):
+    plt.text(1.5 + i, 1.5, "GAP")
+
+for i in range(6):
+    plt.text(1.5 + i, 5.5, "GAP")
+
+plt.show()
+# SFN = math.floor(1/10)
+# subframe = mod(1, 10)
+
+
